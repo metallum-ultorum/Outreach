@@ -38,7 +38,7 @@ public class Logger {
         telemetry.log().add("-- Permanent --");
 
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduledTask = scheduler.scheduleAtFixedRate(this::periodic, 0, 800, TimeUnit.MILLISECONDS);
+        scheduledTask = scheduler.scheduleWithFixedDelay(this::periodic, 0, 800, TimeUnit.MILLISECONDS);
     }
 
     public void stop() {

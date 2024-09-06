@@ -22,7 +22,6 @@ public class BaseRobot {
     public final Map<String, Servo> servos = new HashMap<>();
     public final Map<String, Object> sensors = new HashMap<>();
     public final ElapsedTime runtime = new ElapsedTime();
-    public final boolean USE_WEBCAM = true;
     public final DcMotor frontLeftMotor;
     public final DcMotor frontRightMotor;
     public final DcMotor rearLeftMotor;
@@ -38,7 +37,6 @@ public class BaseRobot {
     private final String previousArmMode = "none";
     public DcMotor armMotor;
     public ColorSensor colorSensor;
-    public Servo droneServo;
     public Arm arm;
     public Settings settings;
     public Odometry odometry;
@@ -80,12 +78,6 @@ public class BaseRobot {
             arm = new Arm(this);
         }
 
-
-        if (Settings.Deploy.DRONE) {
-            droneServo = hardwareMap.get(Servo.class, "drone");
-            servos.put("drone", droneServo);
-            droneServo.scaleRange(0, 1);
-        }
 
 
         if (Settings.Deploy.ODOMETRY) {
@@ -174,9 +166,6 @@ public class BaseRobot {
         if (primaryGamepad.dpad_right) {
             strafePower += dpadPower;
         }
-        /*
-            TODO increase/decrease rotation and movement speeds when x/y/a/b are pressed
-         */
 
         /*
             Drives the motors based on the given power/rotation
@@ -185,14 +174,6 @@ public class BaseRobot {
     }
 
     public void gamepadAuxiliary() {
-        // BACK: Launch drone
-        if (Settings.Deploy.DRONE) {
-            if (auxGamepad.back) {
-                droneServo.setPosition(droneServo.getPosition() + 0.2);
-            } else {
-                droneServo.setPosition(droneServo.getPosition() - 0.4);
-            }
-        }
 
         // Arm manager, the main auxiliary function
         // Y: Extend arm upwards | X: Retract arm

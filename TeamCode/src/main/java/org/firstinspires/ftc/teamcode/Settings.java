@@ -27,6 +27,7 @@ public class Settings {
                     enabledFlags.append(field.getName()).append(", ");
                 }
             } catch (IllegalAccessException e) {
+                //noinspection CallToPrintStackTrace
                 e.printStackTrace();
             }
         }
