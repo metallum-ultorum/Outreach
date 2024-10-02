@@ -138,16 +138,16 @@ public class BaseRobot {
             Left joystick sets the power of the wheels
          */
         double strafePower = primaryGamepad.left_stick_x;
-        double drivePower = -primaryGamepad.left_stick_y;
+        double drivePower = primaryGamepad.left_stick_y;
 
         /*
             Bumpers rotate the robot
          */
         if (primaryGamepad.right_bumper) {
-            rotation += bumperPower;
+            rotation -= bumperPower;
         }
         if (primaryGamepad.left_bumper) {
-            rotation -= bumperPower;
+            rotation += bumperPower;
         }
         
        
