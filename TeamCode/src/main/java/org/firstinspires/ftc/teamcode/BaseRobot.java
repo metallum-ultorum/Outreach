@@ -155,10 +155,10 @@ public class BaseRobot {
             D-pad does fine-tuned movement at a constant rate in a single direction
          */
         if (primaryGamepad.dpad_up) {
-            drivePower += dpadPower;
+            drivePower -= dpadPower;
         }
         if (primaryGamepad.dpad_down) {
-            drivePower -= dpadPower;
+            drivePower += dpadPower;
         }
         if (primaryGamepad.dpad_left) {
             strafePower -= dpadPower;
